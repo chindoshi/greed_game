@@ -1,4 +1,14 @@
-greed_game
+Chintan (Greed dice game implementation as described in ruby koans)
+==========
+
+Setup:
+gem install rspec
+
+To start game:
+uby -I. game.rb
+
+Run rspec tests:
+rspec
 ==========
 
 Greed - Dice game as per RubyKoans Tutorial
