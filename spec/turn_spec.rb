@@ -27,9 +27,27 @@ describe Turn do
 		  		end
 		  	end
 
-		  	expect(turn.score()).to be >= 300
+		  	expect(turn.score()).to be >= 300		  	
+		  	expect(@player.score()).to be >= 300
 		  	expect(@player.in_the_game).to be_true
-		  end		  
+		  end	
+
+		  it "updates the player's score" do
+		  	
+		  	@player.in_the_game = true
+		  	old_score = @player.score
+		  	
+		  	while(true)
+		  		turn = Turn.new(@player)
+		  		turn.stub(:gets).and_return("end")
+		  		turn.start
+		  		if turn.score() >= 0
+		  			break
+		  		end
+
+		  		expect(@player.score).to be > old_score
+		  	end
+		  end	  
 
 	end
 
