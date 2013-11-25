@@ -20,21 +20,7 @@ class Game
 
 		while(!@final_round)
 			@players.each do |player|
-				puts "***********START TURN****************"
-				puts "#{player.to_s}\n"
-
-				turn = Turn.new(player)
-				turn.start()
-
-				player.in_the_game = true if (!player.in_the_game and turn.score >= 300)
-				player.score += turn.score if player.in_the_game
-
-				puts "Turn score is #{turn.score}\n"
-				puts "#{player.to_s}\n"
-				puts "***********END TURN****************\n\n"
-
-				puts "Press enter key to continue\n"
-				gets()
+				play_turn(player)
 
 				if player.score >= 3000
 					@final_round = true 
@@ -46,15 +32,38 @@ class Game
 		#final round
 		puts "Going into the final round\n\n"
 		@players.each do |player|
-
+			play_turn(player)
 		end
 
 		#final scores
-		players.each do |player|
+		print_final_scores()
+		puts "Game ended."
+	end
+
+	private
+
+	def play_turn(player)
+		puts "***********START TURN****************"
+		puts "#{player.to_s}\n"
+
+		turn = Turn.new(player)
+		turn.start()
+
+		player.in_the_game = true if (!player.in_the_game and turn.score >= 300)
+		player.score += turn.score if player.in_the_game
+
+		puts "Turn score is #{turn.score}\n"
+		puts "#{player.to_s}\n"
+		puts "***********END TURN****************\n\n"
+
+		puts "Press enter key to continue\n"
+		gets()			
+	end
+
+	def print_final_scores
+		@players.each do |player|
 			puts "Player #{player.id} final score is #{player.score}"
 		end
-
-		puts "Game ended."
 	end
 
 end
