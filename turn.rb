@@ -15,7 +15,7 @@ class Turn
 
 	def roll()
 		roll = Roll.new(@no_of_dices)
-		puts roll.to_s
+		puts roll.to_s + "\n"
 		
 		if (roll.score() == 0)
 			@score = 0
@@ -42,7 +42,6 @@ class Turn
 	end
 
 	def end_turn()
-		puts "End of turn"
 		@end_of_turn = true
 	end
 

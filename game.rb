@@ -15,9 +15,13 @@ class Game
 
 	def start()
 
+		puts "Starting game.\n\n"
+
 		while(true)
 			@players.each do |player|
+				puts "***********START TURN****************"
 				puts player.to_s
+
 				turn = Turn.new(player)
 				turn.start()
 
@@ -25,8 +29,9 @@ class Game
 				player.score += turn.score if player.in_the_game
 
 				puts "Turn ended for #{player.to_s}"
+				puts "*************END TURN*************\n\n"
 
-				break if player.score >= 3000
+				break if player.score >= 3000 #go into final round
 			end
 		end
 
