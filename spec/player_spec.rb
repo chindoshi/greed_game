@@ -11,7 +11,7 @@ describe Player do
 		end
 
 		context "with valid parameters" do
-			it "simulates the roll" do
+			it "defaults player correctly" do
 				player1 = Player.new(2)
 
 				expect(player1.score).to eq(0)
