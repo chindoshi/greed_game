@@ -3,10 +3,11 @@ require 'roll'
 require 'turn'
 
 class Game
-	attr_accessor :no_of_players, :players
+	attr_accessor :players
 
 	def initialize(no_of_players)
 		@players = []
+		@final_round = false
 
 		no_of_players.times do |i|
 			@players << Player.new(i)
@@ -17,10 +18,10 @@ class Game
 
 		puts "Starting game.\n\n"
 
-		while(true)
+		while(!@final_round)
 			@players.each do |player|
 				puts "***********START TURN****************"
-				puts player.to_s
+				puts "#{player.to_s}\n"
 
 				turn = Turn.new(player)
 				turn.start()
@@ -28,14 +29,25 @@ class Game
 				player.in_the_game = true if (!player.in_the_game and turn.score >= 300)
 				player.score += turn.score if player.in_the_game
 
-				puts "Turn ended for #{player.to_s}"
-				puts "*************END TURN*************\n\n"
+				puts "Turn score is #{turn.score}\n"
+				puts "#{player.to_s}\n"
+				puts "***********END TURN****************\n\n"
 
-				break if player.score >= 3000 #go into final round
+				puts "Press enter key to continue\n"
+				gets()
+
+				if player.score >= 3000
+					@final_round = true 
+					break
+				end
 			end
 		end
 
 		#final round
+		puts "Going into the final round\n\n"
+		@players.each do |player|
+
+		end
 
 		#final scores
 		players.each do |player|
