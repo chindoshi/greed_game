@@ -49,9 +49,6 @@ class Game
 		turn = Turn.new(player)
 		turn.start()
 
-		player.in_the_game = true if (!player.in_the_game and turn.score >= 300)
-		player.score += turn.score if player.in_the_game
-
 		puts "Turn score is #{turn.score}\n"
 		puts "#{player.to_s}\n"
 		puts "***********END TURN****************\n\n"

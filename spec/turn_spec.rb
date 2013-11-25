@@ -8,7 +8,7 @@ describe Turn do
 	
 	describe "#start" do
 
-		  it "scores 0 when a user eventually rolls non-scoring dices" do
+		  it "scores 0 when a user eventually fails to roll any scoring dices" do
 		  	turn = Turn.new(@player)
 		  	turn.stub(:gets).and_return("roll")
 		  	turn.start
@@ -16,12 +16,19 @@ describe Turn do
 		  	expect(turn.score()).to eq(0)
 		  end
 
-		  it "returns valid score when a user ends the roll" do
-		  	turn = Turn.new(@player)
-		  	turn.stub(:gets).and_return("end")
-		  	turn.start
+		  it "player is marked as in the game on scores above 300 for first time" do
 
-		  	expect(turn.score()).to be > 0
+		  	while(true)
+		  		turn = Turn.new(@player)
+		  		turn.stub(:gets).and_return("roll","end")
+		  		turn.start
+		  		if turn.score() >= 300
+		  			break
+		  		end
+		  	end
+
+		  	expect(turn.score()).to be >= 300
+		  	expect(@player.in_the_game).to be_true
 		  end		  
 
 	end

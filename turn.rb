@@ -42,6 +42,8 @@ class Turn
 	end
 
 	def end_turn()
+		@player.in_the_game = true if (!@player.in_the_game and @score >= 300)
+		@player.score += @score if @player.in_the_game		
 		@end_of_turn = true
 	end
 
